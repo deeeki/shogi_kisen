@@ -16,7 +16,7 @@ end
 @games = {}
 agent = Mechanize.new
 agent.get(RESOURCE_URL)
-agent.page.root.search('table.kisen')[0].children.each do |tr|
+agent.page.root.search('table')[0].children.each do |tr|
 	if /備考/ =~ tr.text
 	elsif /(?<month>\d+)月(?<first>[\d]+)・(?<second>[\d]+)日/ =~ tr.text
 		@date = Time.now.year.to_s + '-' + format('%02d', month) + '-' + format('%02d', first)
