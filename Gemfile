@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'rubytter'
+gem 'dotenv'
 gem 'mechanize'
+gem 'twitter'

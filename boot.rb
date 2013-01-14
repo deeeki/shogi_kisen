@@ -1,19 +1,12 @@
-#require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default) if defined?(Bundler)
 
-require File.expand_path('../config', __FILE__)
+$:.unshift(File.expand_path('../lib', __FILE__))
+require 'jsa'
 
-Dir.mkdir('log') unless File.directory?('log')
-
-@consumer = OAuth::Consumer.new(
-	CONSUMER_KEY,
-	CONSUMER_SECRET,
-	{:site => 'http://api.twitter.com'}
-)
-
-@access_token = OAuth::AccessToken.new(
-	@consumer,
-	ACCESS_TOKEN,
-	ACCESS_SECRET
-)
+Twitter.configure do |config|
+  config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
+  config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
+  config.oauth_token = ENV['TWITTER_ACCESS_TOKEN']
+  config.oauth_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
+end
