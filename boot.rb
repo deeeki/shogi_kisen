@@ -4,6 +4,8 @@ Bundler.require(:default) if defined?(Bundler)
 $:.unshift(File.expand_path('../lib', __FILE__))
 require 'jsa'
 
+Dotenv.load
+
 Twitter.configure do |config|
   config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
   config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
