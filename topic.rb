@@ -7,10 +7,10 @@ latest = Time.parse(IO.read(LOG))
 
 exit unless JSA::Topic.latest_updated > latest
 
-JSA::Topic.fetch.each do |topic|
+JSA::Topic.fetch.reverse.each do |topic|
     next if topic.updated <= latest
 
-    tweet = %[【#{topic.type}】 #{topic.title} #{topic.link} (#{topic.published.strftime('%Y年%m月%d日')}) #shogi]
+    tweet = %[【#{topic.type}】 #{topic.title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}) #shogi]
     Twitter.update(tweet)
     sleep(5)
 end
