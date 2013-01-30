@@ -8,10 +8,14 @@ latest = Time.parse(IO.read(LOG))
 exit unless JSA::Topic.latest_updated > latest
 
 JSA::Topic.fetch.reverse.each do |topic|
-    next if topic.updated <= latest
+  next if topic.updated <= latest
 
-    tweet = %[【#{topic.type}】 #{topic.title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}) #shogi]
+  tweet = %[【#{topic.type}】 #{topic.title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}) #shogi]
+  begin
     Twitter.update(tweet)
-    sleep(5)
+  rescue => e
+    raise e unless e.message == 'Status is a duplicate'
+  end
+  sleep(5)
 end
 IO.write(LOG, JSA::Topic.latest_updated)
