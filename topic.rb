@@ -10,7 +10,8 @@ exit unless JSA::Topic.latest_updated > latest
 JSA::Topic.fetch.reverse.each do |topic|
   next if topic.updated <= latest
 
-  tweet = %[【#{topic.type}】 #{topic.title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}) #shogi]
+  action = (topic.published > latest) ? '公開' : '更新'
+  tweet = %[【#{topic.type}】 #{topic.title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}#{action}) #shogi]
   begin
     Twitter.update(tweet)
   rescue => e
