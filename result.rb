@@ -18,7 +18,12 @@ games_hash.sort.each do |date_str, games|
     suffix << ' ' << JSA::Game::RESULT_URL if i == games.size - 1
     suffix << ' #shogi' if i.zero?
     tweet = %[#{date.strftime('%Y年%m月%d日')}の対局結果 【#{game.title}】 #{game.black_winlose}#{game.black_player} - #{game.white_player}#{game.white_winlose}#{suffix}]
-    Twitter.update(tweet)
+    begin
+      Twitter.update(tweet)
+    rescue => e
+      p game, tweet
+      raise e unless e.message == 'Status is a duplicate'
+    end
     sleep(5)
   end
   IO.write(LOG, date_str)

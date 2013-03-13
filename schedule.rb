@@ -12,7 +12,12 @@ games_hash.sort.each do |date_str, games|
     suffix << ' ' << JSA::Game::SCHEDULE_URL if i == games.size - 1
     suffix << ' #shogi' if i.zero?
     tweet = %[#{today.strftime('%Y年%m月%d日')}の対局予定 【#{game.title}】 #{game.black_player} - #{game.white_player}#{suffix}]
-    Twitter.update(tweet)
+    begin
+      Twitter.update(tweet)
+    rescue => e
+      p game, tweet
+      raise e unless e.message == 'Status is a duplicate'
+    end
     sleep(5)
   end
   break
