@@ -3,6 +3,7 @@ Bundler.require(:default) if defined?(Bundler)
 
 $:.unshift(File.expand_path('../lib', __FILE__))
 require 'jsa'
+require 'nhk_cup'
 
 Dotenv.load
 
