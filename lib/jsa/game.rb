@@ -43,13 +43,13 @@ module JSA
 
       def from_row row = []
         new({
-          title: row[4],
-          black_winlose: row[0],
-          black_player: row[1].gsub(/　/, ''),
-          white_winlose: row[3],
-          white_player: row[2].gsub(/　/, ''),
-          remark: row[5],
-          place: row[6]
+          title: row[4].gsub(/[　\s]+/, ''),
+          black_winlose: row[0].gsub(/[　\s]+/, ''),
+          black_player: row[1].gsub(/[　\s]+/, ''),
+          white_winlose: row[3].gsub(/[　\s]+/, ''),
+          white_player: row[2].gsub(/[　\s]+/, ''),
+          remark: row[5].gsub(/\A[　\s]+\z/, ''),
+          place: row[6].gsub(/\A[　\s]+\z/, ''),
         })
       end
     end

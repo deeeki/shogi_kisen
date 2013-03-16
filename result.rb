@@ -11,9 +11,8 @@ games_hash.sort.each do |date_str, games|
   date = Date.parse(date_str)
   next if date <= latest
 
+  games.reject!{|g| g.black_winlose.empty? }
   games.each_with_index do |game, i|
-    next unless /[○●]+/ =~ game.black_winlose
-
     suffix = ''
     suffix << ' ' << JSA::Game::RESULT_URL if i == games.size - 1
     suffix << ' #shogi' if i.zero?
