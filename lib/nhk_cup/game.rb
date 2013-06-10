@@ -7,7 +7,7 @@ module NHKCup
     AGENT = Mechanize.new
 
     class << self
-      def latest
+      def latest_date_str
         AGENT.get(REPLAY_URL).at('body').attributes['onload'].value.scan(/\d+/).first rescue nil
       end
 

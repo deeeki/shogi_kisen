@@ -5,7 +5,7 @@ LOG = File.expand_path('../log/nhk_latest.log', __FILE__)
 File.write(LOG, '20130101') unless File.exist?(LOG)
 latest = File.read(LOG)
 
-date_str = NHKCup::Game.latest
+date_str = NHKCup::Game.latest_date_str
 exit unless latest < date_str
 
 game = NHKCup::Game.find(date_str)
