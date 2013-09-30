@@ -20,8 +20,8 @@ games_hash.sort.each do |date_str, games|
     begin
       Twitter.update(tweet)
     rescue => e
-      p game, tweet
-      raise e unless e.message == 'Status is a duplicate'
+      p game, tweet, e
+      raise e unless e.message.include?('duplicate')
     end
     sleep(5)
   end

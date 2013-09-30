@@ -17,8 +17,8 @@ tweet = %[【NHK杯】棋譜更新 #{game_str} #{NHKCup::Game::REPLAY_URL}?#{dat
 begin
   Twitter.update(tweet)
 rescue => e
-  p game, tweet
-  raise e
+  p game, tweet, e
+  raise e unless e.message.include?('duplicate')
 end
 
 File.write(LOG, date_str)
