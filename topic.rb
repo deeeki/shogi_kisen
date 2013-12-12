@@ -12,7 +12,10 @@ JSA::Topic.fetch.reverse.each do |topic|
 
   action = (topic.published > latest) ? '公開' : '更新'
   type = topic.type ? "【#{topic.type}】 " : ''
-  tweet = %[#{type}#{topic.title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}#{action}) #shogi]
+  title = topic.title
+  title_max_length = 140 - type.size - 23 - 11 - 2 - 6 - 5 # link/date/action/hashtag/etc
+  title = title[0, title_max_length - 4] + ' ...' if title.size > title_max_length
+  tweet = %[#{type}#{title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}#{action}) #shogi]
   begin
     Twitter.update(tweet)
   rescue => e
