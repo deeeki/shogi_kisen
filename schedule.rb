@@ -13,7 +13,7 @@ games_hash.sort.each do |date_str, games|
     suffix << ' #shogi' if i.zero?
     tweet = %[#{today.strftime('%Y年%m月%d日')}の対局予定 【#{game.title}】 #{game.black_player} - #{game.white_player}#{suffix}]
     begin
-      Twitter.update(tweet)
+      @client.update(tweet)
     rescue => e
       p game, tweet, e
       raise e unless e.message.include?('duplicate')

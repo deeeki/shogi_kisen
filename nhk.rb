@@ -15,7 +15,7 @@ game_str = "[#{game.title.delete('NHK杯')} #{game.stage}] #{game.player1} - #{g
 tweet = %[【NHK杯】棋譜更新 #{game_str} #{NHKCup::Game::REPLAY_URL}?#{date_str}&t=s #{onair_str} #shogi]
 
 begin
-  Twitter.update(tweet)
+  @client.update(tweet)
 rescue => e
   p game, tweet, e
   raise e unless e.message.include?('duplicate')

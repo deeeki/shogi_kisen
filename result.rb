@@ -18,7 +18,7 @@ games_hash.sort.each do |date_str, games|
     suffix << ' #shogi' if i.zero?
     tweet = %[#{date.strftime('%Y年%m月%d日')}の対局結果 【#{game.title}】 #{game.black_winlose}#{game.black_player} - #{game.white_player}#{game.white_winlose}#{suffix}]
     begin
-      Twitter.update(tweet)
+      @client.update(tweet)
     rescue => e
       p game, tweet, e
       raise e unless e.message.include?('duplicate')

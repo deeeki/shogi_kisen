@@ -17,7 +17,7 @@ JSA::Topic.fetch.reverse.each do |topic|
   title = title[0, title_max_length - 4] + ' ...' if title.size > title_max_length
   tweet = %[#{type}#{title} #{topic.link} (#{topic.updated.strftime('%Y年%m月%d日')}#{action}) #shogi]
   begin
-    Twitter.update(tweet)
+    @client.update(tweet)
   rescue => e
     raise e unless e.message == 'Status is a duplicate'
   end
