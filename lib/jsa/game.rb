@@ -2,6 +2,8 @@
 module JSA
   class Game
     GAME_URL = 'http://www.shogi.or.jp/game/'
+    SCHEDULE_URL = 'http://www.shogi.or.jp/game/schedule/'
+    RESULT_URL = 'http://www.shogi.or.jp/game/result/'
     SCHEDULE_HTML_CLASS = 'tableElements03'
     RESULT_HTML_CLASS = 'tableElements01'
     AGENT = Mechanize.new
