@@ -9,7 +9,7 @@ games_hash.sort.each do |date_str, games|
 
   games.each_with_index do |game, i|
     suffix = ''
-    suffix << ' ' << JSA::Game::SCHEDULE_URL if i == games.size - 1
+    suffix << ' ' << JSA::Game::GAME_URL if i == games.size - 1
     suffix << ' #shogi' if i.zero?
     tweet = %[#{today.strftime('%Y年%m月%d日')}の対局予定 【#{game.title}】 #{game.black_player} - #{game.white_player}#{suffix}]
     begin
