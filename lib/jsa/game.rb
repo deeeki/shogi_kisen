@@ -6,7 +6,7 @@ module JSA
     RESULT_URL = 'http://www.shogi.or.jp/game/result/'
     SCHEDULE_HTML_CLASS = 'tableElements03'
     RESULT_HTML_CLASS = 'tableElements01'
-    AGENT = Mechanize.new
+
     attr_accessor :title, :draw, :black_winlose, :black_player, :white_winlose, :white_player, :place, :remark
 
     @html_class = SCHEDULE_HTML_CLASS
