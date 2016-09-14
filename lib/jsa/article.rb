@@ -18,7 +18,8 @@ module JSA
         end
       end
 
-      def fetch_and_filter url: nil
+      def fetch_and_filter options = {}
+        url = options[:url]
         fetch
         index = @items.find_index{|i| i.url == url }
         index ? @items.slice(0, index) : @items
